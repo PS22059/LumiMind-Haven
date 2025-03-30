@@ -1,11 +1,11 @@
-export async function generateStaticParams() {
-  return [];
-}
+"use client";
 
 import MeetingClient from "./MeetingClient";
+import { useParams } from "next/navigation";
 
-function MeetingPage({ params }: { params: { id: string } }) {
-  return <MeetingClient id={params.id} />;
+function MeetingPage() {
+  const { id } = useParams();
+  return <MeetingClient id={id as string} />;
 }
 
 export default MeetingPage;
