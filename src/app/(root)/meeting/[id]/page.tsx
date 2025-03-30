@@ -9,6 +9,13 @@ import { StreamCall, StreamTheme } from "@stream-io/video-react-sdk";
 import { useParams } from "next/navigation";
 import { useState } from "react";
 
+// Add generateStaticParams for static generation
+export async function generateStaticParams() {
+  // Since meetings are dynamic and created at runtime,
+  // we'll return an empty array to indicate no static paths
+  return [];
+}
+
 function MeetingPage() {
   const { id } = useParams();
   const { isLoaded } = useUser();
