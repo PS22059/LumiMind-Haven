@@ -9,6 +9,10 @@ import { StreamCall, StreamTheme } from "@stream-io/video-react-sdk";
 import { useParams } from "next/navigation";
 import { useState } from "react";
 
+export async function generateStaticParams() {
+  return [];
+}
+
 function MeetingPage() {
   const { id } = useParams();
   const { isLoaded } = useUser();
