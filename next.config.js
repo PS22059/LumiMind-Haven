@@ -4,6 +4,8 @@ const nextConfig = {
     images: {
         unoptimized: true,
     },
+    reactStrictMode: true,
+    basePath: "//LumiMind-Haven",
 };
 
 export default nextConfig;
