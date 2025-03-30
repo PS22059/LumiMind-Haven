@@ -9,14 +9,6 @@ import { StreamCall, StreamTheme } from "@stream-io/video-react-sdk";
 import { useParams } from "next/navigation";
 import { useState } from "react";
 
-// Generate static params for build time
-export function generateStaticParams() {
-  // Generate an array of meeting IDs that will be pre-rendered
-  return Array.from({ length: 20 }, (_, i) => ({
-    id: `meeting-${i + 1}`,
-  }));
-}
-
 function MeetingPage() {
   const { id } = useParams();
   const { isLoaded } = useUser();
