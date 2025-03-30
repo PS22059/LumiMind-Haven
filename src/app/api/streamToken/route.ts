@@ -1,11 +1,10 @@
-//steam.actions.ts
+import { NextResponse } from "next/server";
 import { currentUser } from "@clerk/nextjs/server";
 import { StreamClient } from "@stream-io/node-sdk";
 
-export const streamTokenProvider = async () => {
+export async function GET() {
   const user = await currentUser();
-
-  if (!user) throw new Error("User not authenticated");
+  if (!user) return NextResponse.json({ error: "User not authenticated" }, { status: 401 });
 
   const streamClient = new StreamClient(
     process.env.NEXT_PUBLIC_STREAM_API_KEY!,
@@ -14,5 +13,5 @@ export const streamTokenProvider = async () => {
 
   const token = streamClient.generateUserToken({ user_id: user.id });
 
-  return token;
-};
+  return NextResponse.json({ token });
+}
