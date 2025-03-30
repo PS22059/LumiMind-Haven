@@ -4,6 +4,9 @@ const nextConfig = {
         unoptimized: true,
     },
     reactStrictMode: true,
+    // XÓA DÒNG output: "export" HOẶC ĐỂ THÀNH "standalone"
+    // output: "export", ❌
+    output: "standalone", // ✅ Sử dụng chế độ server runtime
 };
 
 export default nextConfig;
