@@ -1,12 +1,12 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
     output: 'export',
-    distDir: "dist",
     images: {
         unoptimized: true,
     },
     reactStrictMode: true,
-    basePath: "//LumiMind-Haven",
+    basePath: '/LumiMind-Haven',
+    assetPrefix: '/LumiMind-Haven/',
 };
 
 export default nextConfig;
