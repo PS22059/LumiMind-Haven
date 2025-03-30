@@ -1,5 +1,3 @@
-"use client";
-
 import LoaderUI from "@/components/LoaderUI";
 import MeetingRoom from "@/components/MeetingRoom";
 import MeetingSetup from "@/components/MeetingSetup";
@@ -8,6 +6,19 @@ import { useUser } from "@clerk/nextjs";
 import { StreamCall, StreamTheme } from "@stream-io/video-react-sdk";
 import { useParams } from "next/navigation";
 import { useState } from "react";
+
+// Tạo một số ID mẫu cho static generation
+export async function generateStaticParams() {
+  return [
+    { id: '1' },
+    { id: '2' },
+    { id: '3' },
+    { id: '4' },
+    { id: '5' }
+  ];
+}
+
+"use client";
 
 function MeetingPage() {
   const { id } = useParams();
@@ -38,4 +49,5 @@ function MeetingPage() {
     </StreamCall>
   );
 }
+
 export default MeetingPage;
