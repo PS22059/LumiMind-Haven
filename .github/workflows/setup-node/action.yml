@@ -1,21 +1,30 @@
-name: setup-node
-description: "Setup Node.js ⚙️ - Cache dependencies ⚡ - Install dependencies 🔧"
-runs:
-  using: "composite"
-  steps:
-    - name: Setup Node.js ⚙️
-      uses: actions/setup-node@v4
-      with:
-        node-version: 20
+jobs:
+  # Build job
+  build:
+    # Specify runner +  build & upload the static files as an artifact
+    runs-on: ubuntu-latest
+    steps:
+      - name: Build static files
+        id: build
+        run: |
+          # <Not provided for brevity>
+          # At a minimum this step should build the static files of your site
+          # <Not provided for brevity>
 
-    - name: Cache dependencies ⚡
-      id: cache_dependencies
-      uses: actions/cache@v3
-      with:
-        path: node_modules
-        key: node-modules-${{ hashFiles('package-lock.json') }}
+      - name: Upload static files as artifact
+        id: deployment
+        uses: actions/upload-pages-artifact@v3 # or specific "vX.X.X" version tag for this action
+        with:
+          path: build_outputs_folder/
 
-    - name: Install dependencies 🔧
-      shell: bash
-      if: steps.cache_dependencies.outputs.cache-hit != 'true'
-      run: npm ci
+  # Deployment job
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
