@@ -2,9 +2,12 @@
 
 import Link from "next/link";
 import { SignedIn, UserButton } from "@clerk/nextjs";
-
+import { Menu, X } from "lucide-react";
+import { useState } from "react";
 
 function Navbar() {
+  const [isOpen, setIsOpen] = useState(false);
+
   const handleScroll = (e: React.MouseEvent<HTMLAnchorElement>, id: string) => {
     e.preventDefault();
     const element = document.getElementById(id);
@@ -14,6 +17,7 @@ function Navbar() {
         block: 'start',
       });
     }
+    setIsOpen(false); // Close menu after clicking
   };
 
   return (
@@ -72,6 +76,17 @@ function Navbar() {
 
         {/* RIGHT SECTION - ACTIONS */}
         <div className="flex items-center gap-4">
+          {/* Mobile menu button */}
+          <button
+            onClick={() => setIsOpen(!isOpen)}
+            className="md:hidden p-2 rounded-md hover:bg-muted"
+          >
+            {isOpen ? (
+              <X className="h-6 w-6 text-primary" />
+            ) : (
+              <Menu className="h-6 w-6 text-primary" />
+            )}
+          </button>
           
           <SignedIn>
             <UserButton 
@@ -82,6 +97,49 @@ function Navbar() {
           </SignedIn>
         </div>
       </div>
+
+      {/* Mobile menu */}
+      {isOpen && (
+        <div className="md:hidden border-t">
+          <div className="px-4 py-3 space-y-3">
+            <Link 
+              href="/" 
+              className="block text-foreground text-primary transition-colors font-bold"
+              onClick={() => setIsOpen(false)}
+            >
+              Trang chủ
+            </Link>
+            <a 
+              href="#about" 
+              onClick={(e) => handleScroll(e, 'about')}
+              className="block text-foreground text-primary transition-colors font-bold"
+            >
+              Về chúng tôi
+            </a>
+            <a 
+              href="#how-it-works" 
+              onClick={(e) => handleScroll(e, 'how-it-works')}
+              className="block text-foreground text-primary transition-colors font-bold"
+            >
+              Cách thức hoạt động
+            </a>
+            <a 
+              href="#counselors" 
+              onClick={(e) => handleScroll(e, 'counselors')}
+              className="block text-foreground text-primary transition-colors font-bold"
+            >
+              Cố vấn
+            </a>
+            <a 
+              href="#contact" 
+              onClick={(e) => handleScroll(e, 'contact')}
+              className="block text-foreground text-primary transition-colors font-bold"
+            >
+              Liên hệ
+            </a>
+          </div>
+        </div>
+      )}
     </nav>
   );
 }
