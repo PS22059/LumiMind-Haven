@@ -7,6 +7,7 @@ const nextConfig = {
     reactStrictMode: true,
     basePath: '/LumiMind-Haven',
     assetPrefix: '/LumiMind-Haven/',
+    trailingSlash: true,
 };
 
 export default nextConfig;
